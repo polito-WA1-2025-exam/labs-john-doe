@@ -27,6 +27,51 @@ Response body:
 short example
 '''
 
+### __GetPokemon__
+URL: '\pokemon\:name'
+HTTP Method:
+Description:
+Request body:
+'''
+short example
+'''
+
+Response:
+Response body:
+'''
+short example
+'''
+### __GetPokemonFromEvolution__
+URL: '\pokemon\:evolution'
+HTTP Method:
+Description:
+Request body:
+'''
+short example
+'''
+
+Response:
+Response body:
+'''
+short example
+'''
+
+### __addPokemon__
+URL: '\pokemon'
+HTTP Method:
+Description:
+Request body:
+'''
+short example
+'''
+
+Response:
+Response body:
+'''
+short example
+'''
+
+
 ### __Title__
 URL: '\'
 HTTP Method:
