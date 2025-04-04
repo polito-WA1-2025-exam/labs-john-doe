@@ -52,3 +52,4 @@ function Game(difficulty){
 
     this.score = 0;
 }
+
