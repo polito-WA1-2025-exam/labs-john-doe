@@ -14,15 +14,23 @@ function Grid (props){
     </Table>
 }*/}
 function Grid(props){
-    const pk = props.pokemon
+    const pk = props.pokemons
     const diff = props.difficulty
+    const selectPokemon = props.selectPokemon
+    const columnsPerRow = 4
+
+    const rows = [];
+    for (let i = 0; i<pk.length; i+=columnsPerRow){
+        rows.push(pk.slice(i, i+columnsPerRow));
+    }
     return(
         <Table>
 
 
             <tbody>
-                    <GridRow/>
-
+                {rows.map((row, idx) => (
+                    <GridRow key={idx} rowPokemons={row} selectPokemon={selectPokemon} />
+                    ))}
             </tbody>
         </Table>
 
@@ -31,23 +39,29 @@ function Grid(props){
 
 function GridRow(props) {
 
-    const pks = props.pokemon
+    const rowPokemons = props.rowPokemons
+    const selectPokemon = props.selectPokemon
     /*
     return (<td>
         <Button variant='primary' onClick={()=>props.selectPokemon(props.pokemon.id)}></Button> <></>
         <Button variant='primary' onClick={()=>props.selectPokemon(props.pokemon.id)}></Button> <></>
         <Button variant='primary' onClick={()=>props.selectPokemon(props.pokemon.id)}></Button> <></>
     </td>)*/
-    return   <td>
-    <PokemonButton />
-    <PokemonButton />
-    <PokemonButton />
+    return (
+        <tr>
+          {rowPokemons.map((pk, idx) => (
+            <td key={idx}>
+              <PokemonButton pokemon={pk} selectPokemon={selectPokemon} />
+            </td>
+          ))}
+        </tr>
+      );   
 
-  </td>
 }
 function PokemonButton(props) {
 
     const pk = props.pokemon
+    const selectPokemon = props.selectPokemon
     /*
     return (<td>
         <Button variant='primary' onClick={()=>props.selectPokemon(props.pokemon.id)}></Button> <></>
@@ -55,10 +69,10 @@ function PokemonButton(props) {
         <Button variant='primary' onClick={()=>props.selectPokemon(props.pokemon.id)}></Button> <></>
     </td>)*/
     return   (
-    <Button>
+    <Button  onClick={() => selectPokemon(pk.name)}>
       <img 
-        src="https://archives.bulbagarden.net/media/upload/2/27/0004Charmander.png"
-        alt="Charmander"
+        src={pk.imageURL}
+        alt={pk.name}
         style={{ height: '100px', width: '100px' }}
       />
     </Button>
