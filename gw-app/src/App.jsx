@@ -2,11 +2,14 @@ import Header from './components/Header.jsx'
 import Footer from './components/Footer'
 import Grid from './components/Grid.jsx'
 import MakeGuess from './components/MakeGuess.jsx'
+import Login from './components/Login.jsx'
+import Layout from './components/Layout.jsx'
 import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { Pokemon, Pokedex, User, Guess, Game } from './models/gwModels.mjs'
+import { Routes, Route, useNavigate } from 'react-router'
 
 function App() {
   const [game, setGame] = useState(null)
@@ -44,10 +47,34 @@ function App() {
 
   return (
    <>
-    <Header/>
-    <MakeGuess guessFeature={guessFeature} guessValue={guessValue} setGuessFeature={setGuessFeature} setGuessValue={setGuessValue} onSubmit={handleGuessSubmit}/>
-    {game && <Grid pokemons={game.remained_pokemon_list}/>}
-   <Footer/>
+
+   <Routes>
+
+      <Route path='/' element={ <Layout/>} >
+
+        <Route index element={<Login/>}> {/* home page */}
+
+        </Route>
+        
+        <Route path='game/:gid' element={
+          <>
+              <MakeGuess guessFeature={guessFeature} guessValue={guessValue} setGuessFeature={setGuessFeature} setGuessValue={setGuessValue} onSubmit={handleGuessSubmit}/>
+            {game && <Grid pokemons={game.remained_pokemon_list}/>}
+    
+          </>
+        }> {/* game page */}
+
+        </Route>
+
+        <Route/> {/* user page */}
+
+      </Route>
+
+   </Routes>
+
+
+    
+
     
    </>
   )
