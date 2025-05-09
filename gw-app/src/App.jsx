@@ -44,38 +44,29 @@ function App() {
     setGuessFeature('');
     setGuessValue('');
   }
-
+  const selectPokemon = (pokemonName) => {
+    console.log('Selected Pokémon:', pokemonName);
+    // You can add more logic here if needed
+  };
   return (
    <>
-
-   <Routes>
-
-      <Route path='/' element={ <Layout/>} >
-
-        <Route index element={<Login/>}> {/* home page */}
-
-        </Route>
-        
-        <Route path='game/:gid' element={
-          <>
-              <MakeGuess guessFeature={guessFeature} guessValue={guessValue} setGuessFeature={setGuessFeature} setGuessValue={setGuessValue} onSubmit={handleGuessSubmit}/>
-            {game && <Grid pokemons={game.remained_pokemon_list}/>}
-    
-          </>
-        }> {/* game page */}
-
-        </Route>
-
-        <Route/> {/* user page */}
-
-      </Route>
-
-   </Routes>
-
-
-    
-
-    
+  <Routes>
+    <Route path='/' element={ <Layout />} >
+      <Route index element={<Login />}/>       
+      <Route path='game/:gid' element={
+        <>
+          <MakeGuess 
+            guessFeature={guessFeature} 
+            guessValue={guessValue} 
+            setGuessFeature={setGuessFeature} 
+            setGuessValue={setGuessValue} 
+            onSubmit={handleGuessSubmit}
+          />
+          {game && <Grid pokemons={game.remained_pokemon_list} selectPokemon={selectPokemon} />}
+        </>
+      } />
+    </Route>
+   </Routes>    
    </>
   )
 }
